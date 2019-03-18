@@ -65,19 +65,28 @@ class UserController extends Controller
         else{
             //we create new user
             //$password = bycrypt($request['password']);
-            $user = User::create([
-                'name'      => $request['name'],
-                'email'     => $request['email'],
-                'password'  => bycrypt($request['password']),
-            ]);
-            $success['token']   =  $user->createToken('epic-ec-app')-> accessToken;
-            $sucess['name']     =  $user->name;
+            try{
+                $user = User::create([
+                    'name'      => $request['name'],
+                    'email'     => $request['email'],
+                    'password'  => bcrypt($request['password']),
+                ]);
+                $success['token']   =  $user->createToken('epic-ec-app')-> accessToken;
+                $sucess['name']     =  $user->name;
+    
+                //return success response
+                return response()->json(
+                    ['success'=>$success],
+                    $this->sucessStatus
+                );
+            }catch (\Exception $e){
+                return response()->json(
+                    ['error'=>$e,
+                     'message:'=>'Email Existed',
+                    ],
 
-            //return success response
-            return response()->json(
-                ['success'=>$success],
-                $this->sucessStatus
-            );
+                );
+            }
 
         }
 
