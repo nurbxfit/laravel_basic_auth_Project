@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         //set token expire in 10days
-        Passport::tokenExpireIn(now()->addDays(10));
+        Passport::tokensExpireIn(now()->addDays(10));
 
         //
     }

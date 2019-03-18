@@ -33,7 +33,7 @@ class UserController extends Controller
             }else{
                 //else the login attempt unsuccess
                 return response()->json(
-                    ['error'=>'Unauthorised'],
+                    ['error'=>'Login Unsucess'],
                     401 //error code for unauthorised
                 );
             }
@@ -88,6 +88,15 @@ class UserController extends Controller
         $user = Auth::user(); //get authenticated user
         return response()->json(
             ['success'=>$user],
+            $this->sucessStatus,
+        );
+    }
+
+    //Logout API, Revoke the token
+    public function logout(Request $request){
+        $request->user()->token()->revoke();
+        return response()->json(
+            ['message'=>'You are now Logged Out'],
             $this->sucessStatus,
         );
     }
