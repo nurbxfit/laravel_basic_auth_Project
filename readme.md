@@ -69,4 +69,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# laravel_basic_auth_API
+# laravel_basic_auth
+##Basic Laravel Project:
+ added auth and passport for authentication,
+ created controllers and models for E-commerce template:
+    - User
+    - Order
+    - Product
+    - Vendor
+    
