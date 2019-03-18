@@ -74,8 +74,8 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 
  added auth and passport for authentication,
  created controllers and models for E-commerce template:
-    - User
-    - Order
-    - Product
-    - Vendor
+ - User
+ - Order
+ - Product
+ - Vendor
     
