@@ -10,7 +10,7 @@ use Validator;
 
 class UserController extends Controller
 {
-    public $sucessStatus = 200;
+    public $successStatus = 200;
 
     //login API
     public function login(){
@@ -23,17 +23,17 @@ class UserController extends Controller
             ])){
                 //authenticate user.
                 $user = Auth::user();
-                $sucess['token'] = $user->createToken('epic-ec-app')->accessToken; //generate new token with name 'epic-ec-app'
+                $success['token'] = $user->createToken('epic-ec-app')->accessToken; //generate new token with name 'epic-ec-app'
 
                 //return response to app in json format
                 return response()->json(
-                    ['sucess'=>$sucess],
-                    $this->sucessStatus
+                    ['success'=>$success],
+                    $this->successStatus
                 );
             }else{
                 //else the login attempt unsuccess
                 return response()->json(
-                    ['error'=>'Login Unsucess'],
+                    ['error'=>'Login Unsuccess'],
                     401 //error code for unauthorised
                 );
             }
@@ -43,7 +43,7 @@ class UserController extends Controller
 
     //REGISTER API
     public function register(Request $request){
-        
+
         //using validator to validate the request form
         $validator = Validator::make($request->all(),
             [
@@ -72,12 +72,12 @@ class UserController extends Controller
                     'password'  => bcrypt($request['password']),
                 ]);
                 $success['token']   =  $user->createToken('epic-ec-app')-> accessToken;
-                $sucess['name']     =  $user->name;
-    
+                $success['name']     =  $user->name;
+
                 //return success response
                 return response()->json(
                     ['success'=>$success],
-                    $this->sucessStatus
+                    $this->successStatus
                 );
             }catch (\Exception $e){
                 return response()->json(
@@ -92,12 +92,12 @@ class UserController extends Controller
 
     }
 
-    //USER DETAILS API 
+    //USER DETAILS API
     public function details(){
         $user = Auth::user(); //get authenticated user
         return response()->json(
             ['success'=>$user],
-            $this->sucessStatus,
+            $this->successStatus,
         );
     }
 
@@ -106,7 +106,7 @@ class UserController extends Controller
         $request->user()->token()->revoke();
         return response()->json(
             ['message'=>'You are now Logged Out'],
-            $this->sucessStatus,
+            $this->successStatus,
         );
     }
 }
