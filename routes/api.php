@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\CORS;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware(CORS::class)->options('login',function(){
 
-//controler for API logins,register
-Route::post('login','API\UserController@login');
+});
+Route::middleware(CORS::class)->post('login','API\UserController@login');
+
 Route::post('register','API\UserController@register');
 
 Route::group(['middleware'=>'auth:api'],
@@ -29,3 +32,5 @@ Route::group(['middleware'=>'auth:api'],
     }
 
 );
+
+
